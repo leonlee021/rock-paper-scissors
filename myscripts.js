@@ -1,12 +1,19 @@
 function computerPlay(){
     const options = ['rock','paper','scissors'];
-    return options[parseInt(Math.random()*2)];
+    return options[parseInt(Math.random()*3)];
 }
 
 let pscore = 0;
-let cscore = 0;
-
+let cscore = 0; 
+let playerSelection;
 let computerSelection;
+
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach((button)=>{button.addEventListener('click',()=>{
+    playerSelection = button.id;
+    game();
+})});
+
 
 function playRound(playerSelection, computerSelection){
     computerSelection = computerPlay();
@@ -41,23 +48,18 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
+
 function game(){
-    let i=0;
-    while (i<5){
-        let playerSelection = prompt("rock, paper, or scissors?","");
-        console.log(playRound(playerSelection,computerSelection));
-        console.log("The current score is " + pscore + ":" + cscore + ".");
-        i++;
-    }
-    if (pscore > cscore){
-        console.log("The final score is " + pscore + ":" + cscore + ". You win!");
-    }
-    else if (cscore > pscore){
+    console.log(playRound(playerSelection,computerSelection));
+    console.log("The current score is " + pscore + ":" + cscore + ".");
+    if (pscore == 5){
         console.log("The final score is " + pscore + ":" + cscore + ". You lose!");
+        pscore = 0;
+        cscore = 0;
     }
-    else if (pscore == cscore){
-        console.log("The final score is " + pscore + ":" + cscore + ". You tied!");
+    else if (cscore == 5){
+        console.log("The final score is " + pscore + ":" + cscore + ". You win!");
+        pscore = 0;
+        cscore = 0;
     }
 }
-
-game();
