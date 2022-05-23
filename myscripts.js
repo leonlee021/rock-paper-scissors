@@ -8,6 +8,15 @@ let cscore = 0;
 let playerSelection;
 let computerSelection;
 
+const player = document.querySelector("#player-score");
+player.textContent = `Player Score: ${pscore}`;
+
+const computer = document.querySelector("#comp-score");
+computer.textContent = `Computer Score: ${cscore}`;
+
+const output = document.querySelector("#output");
+output.textContent = "May the Best Person Win!"
+
 const buttons = document.querySelectorAll('.btn');
 buttons.forEach((button)=>{button.addEventListener('click',()=>{
     playerSelection = button.id;
@@ -19,46 +28,51 @@ function playRound(playerSelection, computerSelection){
     computerSelection = computerPlay();
     if (playerSelection.toLowerCase()=="rock" && computerSelection=="scissors"){
         pscore++;
-        return "You Win! Rock beats Scissors";
+        output.textContent = "You Win! Rock beats scissors.";
     }
     else if (playerSelection.toLowerCase()=="rock" && computerSelection == "paper"){
         cscore++;
-        return "You Lose! Paper beats Rock";
+        output.textContent =  "You Lose! Paper beats rock.";
     }
-    else if ((playerSelection.toLowerCase()=="rock" && computerSelection == "rock") || 
-    (playerSelection.toLowerCase()=="paper" && computerSelection == "paper") || 
-    (playerSelection.toLowerCase()=="scissors" && computerSelection == "scissors") ){
-        return "You Draw!";
+    else if (playerSelection.toLowerCase()=="rock" && computerSelection == "rock"){
+        output.textContent = "You Drew! You and the computer both chose rock."
+    } 
+    else if (playerSelection.toLowerCase()=="paper" && computerSelection == "paper"){
+        output.textContent = "You Drew! You and the computer both chose paper."
+    } 
+    else if (playerSelection.toLowerCase()=="scissors" && computerSelection == "scissors"){
+        output.textContent =  "You Drew! You and the computer both chose scissors.";
     }
     else if (playerSelection.toLowerCase()=="paper" && computerSelection == "scissors"){
         cscore++;
-        return "You Lose! Scissors beat Paper";
+        output.textContent =  "You Lose! Scissors beat paper.";
     }
     else if (playerSelection.toLowerCase()=="paper" && computerSelection == "rock"){
         pscore++;
-        return "You Win! Paper beats Rock";
+        output.textContent =  "You Win! Paper beats rock.";
     }
     else if (playerSelection.toLowerCase()=="scissors" && computerSelection == "paper"){
         cscore++;
-        return "You Win! Scissors beat Paper";
+        output.textContent =  "You Win! Scissors beat paper.";
     }
     else if (playerSelection.toLowerCase()=="scissors" && computerSelection == "rock"){
         cscore++;
-        return "You Lose! Rock beats Scissors";
+        output.textContent =  "You Lose! Rock beats scissors.";
     }
 }
 
 
 function game(){
-    console.log(playRound(playerSelection,computerSelection));
-    console.log("The current score is " + pscore + ":" + cscore + ".");
+    playRound(playerSelection,computerSelection);
+    player.textContent = `Player Score: ${pscore}`;
+    computer.textContent = `Computer Score: ${cscore}`;
     if (pscore == 5){
-        console.log("The final score is " + pscore + ":" + cscore + ". You lose!");
+        output.textContent = "The final score is " + pscore + ":" + cscore + ". You lose!";
         pscore = 0;
         cscore = 0;
     }
     else if (cscore == 5){
-        console.log("The final score is " + pscore + ":" + cscore + ". You win!");
+        output.textContent = "The final score is " + pscore + ":" + cscore + ". You win!";
         pscore = 0;
         cscore = 0;
     }
